@@ -24,7 +24,7 @@ jobs:
           timeout: 600
           dangerous-clean-slate: false
           exclude: |
-            **/.git*
+                        .git/
             **/.github/**
             **/.vscode/**
             **/node_modules/**
