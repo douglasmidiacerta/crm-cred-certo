@@ -1,10 +1,6 @@
 {
   "version": 2,
   "name": "crm-cred-certo",
-  "routes": [
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ],
   "headers": [
     {
       "source": "/(.*)",
