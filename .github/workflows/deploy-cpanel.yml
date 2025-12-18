@@ -1,24 +1,36 @@
-name: Deploy to cPanel FTP
+name: FTP Deploy to cPanel (Frontend)
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+      - name: Deploy via FTP to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: /home2/credcerto/emprestimocartaocreditobh.com.br/
           protocol: ftps
+          port: 21
+          server-dir: /home2/credcerto/emprestimocartaocreditobh.com.br/
+          timeout: 600
           dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/.vscode/**
+            **/node_modules/**
+            **/dist/**
+            **/build/**
+            **/*.log
+            **/*.tmp
+            **/*.zip
+            backend/**
