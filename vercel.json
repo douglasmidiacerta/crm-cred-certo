@@ -1,6 +1,8 @@
 {
   "version": 2,
   "name": "crm-cred-certo",
+  "public": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
