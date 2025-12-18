@@ -3,18 +3,18 @@
   "name": "crm-cred-certo",
   "builds": [
     {
-      "src": "index.html",
+      "src": "*.html",
       "use": "@vercel/static"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/index.html"
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
-      "source": "/((?!assets)[^.]*(?:/[^.]*)*)$",
-      "destination": "/index.html"
+      "src": "/(.*?)(?:\\.html)?",
+      "dest": "/index.html"
     }
   ],
   "headers": [
