@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Cred Certo - CRM de Cartas Contempladas | Sistema de Gestão de Vendas</title>
+    <meta name="description" content="Sistema CRM completo para gestão de vendas de cartas contempladas de consórcio. Dashboard, pipeline de vendas, controle financeiro e muito mais.">
+    <meta name="keywords" content="CRM, cartas contempladas, consórcio, gestão de vendas, pipeline, financeiro">
+    <meta name="author" content="Cred Certo">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://crm-cred-certo.vercel.app/">
+    <meta property="og:title" content="Cred Certo - CRM de Cartas Contempladas">
+    <meta property="og:description" content="Sistema completo para gestão de vendas de cartas contempladas de consórcio.">
+    <meta property="og:image" content="https://crm-cred-certo.vercel.app/assets/img/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://crm-cred-certo.vercel.app/">
+    <meta property="twitter:title" content="Cred Certo - CRM de Cartas Contempladas">
+    <meta property="twitter:description" content="Sistema completo para gestão de vendas de cartas contempladas de consórcio.">
+    <meta property="twitter:image" content="https://crm-cred-certo.vercel.app/assets/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1e3a8a">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo-container">
+            <h1 class="logo">Cred Certo</h1>
+            <p class="logo-subtitle">Cartas Contempladas</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="vendas">
+                <i class="fas fa-handshake"></i>
+                <span>Vendas</span>
+            </a>
+            <a href="#" class="nav-item" data-page="clientes">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="#" class="nav-item" data-page="cartas">
+                <i class="fas fa-file-contract"></i>
+                <span>Cartas</span>
+            </a>
+            <a href="#" class="nav-item" data-page="financeiro">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Financeiro</span>
+            </a>
+            <a href="#" class="nav-item" data-page="relatorios">
+                <i class="fas fa-chart-bar"></i>
+                <span>Relatórios</span>
+            </a>
+            <a href="#" class="nav-item" data-page="configuracoes">
+                <i class="fas fa-cog"></i>
+                <span>Configurações</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <div>
+                    <p class="user-name">Admin</p>
+                    <p class="user-role">Administrador</p>
+                </div>
+            </div>
+            <button class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Overlay para fechar sidebar no mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-header">
+            <h2 class="page-title">Dashboard</h2>
+            <div class="header-actions">
+                <button class="btn-notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                <button class="btn-profile">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-area" id="content-area">
+            <!-- O conteúdo dinâmico será carregado aqui -->
+        </div>
+    </main>
+
+    <!-- Botão Menu Mobile -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/modals.js"></script>
+    <script src="assets/js/filters.js"></script>
+    <script src="assets/js/router.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/venda-detalhe.js"></script>
+    <script>
+        // Proteger página - verificar autenticação
+        (async function() {
+            const isProtected = await Auth.protectPage();
+            if (isProtected) {
+                console.log('✅ Usuário autenticado:', Auth.currentUser);
+                
+                // Atualizar nome do usuário na sidebar
+                const userName = document.querySelector('.user-name');
+                const userRole = document.querySelector('.user-role');
+                
+                if (userName && Auth.currentUser) {
+                    userName.textContent = Auth.currentUser.nome;
+                }
+                
+                if (userRole && Auth.currentUser) {
+                    const roles = {
+                        'admin': 'Administrador',
+                        'vendedor': 'Vendedor',
+                        'financeiro': 'Financeiro'
+                    };
+                    userRole.textContent = roles[Auth.currentUser.perfil] || Auth.currentUser.perfil;
+                }
+                
+                // Logout ao clicar no botão
+                const btnLogout = document.querySelector('.btn-logout');
+                if (btnLogout) {
+                    btnLogout.addEventListener('click', async () => {
+                        if (confirm('Deseja realmente sair?')) {
+                            await Auth.logout();
+                        }
+                    });
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

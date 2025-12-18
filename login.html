@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cred Certo CRM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 40px 32px;
+            text-align: center;
+            color: white;
+        }
+
+        .login-logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-body {
+            padding: 40px 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-toggle-password {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .btn-toggle-password:hover {
+            color: #3b82f6;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 8px;
+        }
+
+        .forgot-password a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+
+        .alert-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 20px 32px 32px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .demo-credentials {
+            background-color: #f1f5f9;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .demo-credentials strong {
+            color: #1e3a8a;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .demo-credentials code {
+            background-color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 480px) {
+            .login-header {
+                padding: 32px 24px;
+            }
+
+            .login-body {
+                padding: 32px 24px;
+            }
+
+            .login-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">💼</div>
+            <h1 class="login-title">Cred Certo</h1>
+            <p class="login-subtitle">Cartas Contempladas</p>
+        </div>
+
+        <div class="login-body">
+            <!-- Credenciais de Demonstração -->
+            <div class="demo-credentials">
+                <strong><i class="fas fa-info-circle"></i> Credenciais de Teste:</strong>
+                <div>Email: <code>admin@credcerto.com</code></div>
+                <div>Senha: <code>Admin@123</code></div>
+            </div>
+
+            <!-- Alert -->
+            <div id="alert" class="alert"></div>
+
+            <!-- Formulário -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="email" 
+                            placeholder="seu@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Senha</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="password" 
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="btn-toggle-password" id="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu sua senha?</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login" id="btn-login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span id="btn-text">Entrar</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            © 2024 Cred Certo. Todos os direitos reservados.
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+        // Elementos
+        const form = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const btnLogin = document.getElementById('btn-login');
+        const btnText = document.getElementById('btn-text');
+        const togglePassword = document.getElementById('toggle-password');
+        const alert = document.getElementById('alert');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+
+        // Toggle mostrar/ocultar senha
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            
+            const icon = togglePassword.querySelector('i');
+            icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // Mostrar alert
+        function showAlert(message, type = 'error') {
+            alert.textContent = message;
+            alert.className = `alert alert-${type} show`;
+            
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 5000);
+        }
+
+        // Verificar se já está logado
+        async function checkAuth() {
+            const isAuth = await Auth.isAuthenticated();
+            if (isAuth) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Executar ao carregar
+        checkAuth();
+
+        // Submit do formulário
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Validações
+            if (!email || !password) {
+                showAlert('Por favor, preencha todos os campos');
+                return;
+            }
+
+            // Desabilitar botão
+            btnLogin.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span> Entrando...';
+
+            try {
+                // Fazer login
+                const result = await Auth.login(email, password);
+
+                if (result.success) {
+                    showAlert('Login realizado com sucesso!', 'success');
+                    
+                    // Redirecionar após 1 segundo
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                } else {
+                    throw new Error(result.error || 'Erro ao fazer login');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                
+                let errorMessage = 'Erro ao fazer login. Tente novamente.';
+                
+                if (error.message.includes('Invalid login credentials')) {
+                    errorMessage = 'Email ou senha incorretos';
+                } else if (error.message.includes('Email not confirmed')) {
+                    errorMessage = 'Email não confirmado. Verifique sua caixa de entrada.';
+                }
+                
+                showAlert(errorMessage);
+                
+                // Reabilitar botão
+                btnLogin.disabled = false;
+                btnText.innerHTML = 'Entrar';
+            }
+        });
+
+        // Esqueceu a senha
+        forgotPasswordLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                showAlert('Digite seu email primeiro');
+                return;
+            }
+            
+            const confirm = window.confirm(`Enviar email de recuperação para ${email}?`);
+            
+            if (confirm) {
+                const result = await Auth.resetPassword(email);
+                
+                if (result.success) {
+                    showAlert('Email de recuperação enviado! Verifique sua caixa de entrada.', 'success');
+                } else {
+                    showAlert('Erro ao enviar email de recuperação');
+                }
+            }
+        });
+
+        // Auto-complete com credenciais de demo ao pressionar Ctrl+D
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'd') {
+                e.preventDefault();
+                emailInput.value = 'admin@credcerto.com';
+                passwordInput.value = 'Admin@123';
+                showAlert('Credenciais de demo preenchidas! Clique em Entrar.', 'success');
+            }
+        });
+    </script>
+</body>
+</html>

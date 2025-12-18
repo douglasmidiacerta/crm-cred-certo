@@ -1,0 +1,11 @@
+# robots.txt para CRM Cred Certo
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://crm-cred-certo.vercel.app/sitemap.xml
+
+# Disallow sensitive areas (quando adicionar autenticação)
+# Disallow: /admin/
+# Disallow: /api/
