@@ -1,0 +1,16 @@
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+.git/
+.github/
+
+*.log
+*.tmp
+
+node_modules/
+dist/
+build/
+
+backend/
