@@ -191,5 +191,10 @@ Para dúvidas ou sugestões sobre o desenvolvimento backend:
 
 ---
 
+
+## 🚀 Deploy Test
+
+✅ Deployment pipeline configured and tested on Dec 18, 2025
 **Desenvolvido para Cred Certo - Cartas Contempladas** 🎯
 >>>>>>> 1b9625d (Initial commit - CRM Cred Certo completo)
+
