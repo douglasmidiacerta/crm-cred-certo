@@ -3,6 +3,7 @@ name: FTP Deploy to cPanel (Frontend)
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   ftp-deploy:
@@ -15,22 +16,21 @@ jobs:
       - name: Deploy via FTP to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.CPANEL_FTP_SERVER }}
+          username: ${{ secrets.CPANEL_FTP_USERNAME }}
+          password: ${{ secrets.CPANEL_FTP_PASSWORD }}
           protocol: ftps
-          port: 21
-          server-dir: /home2/credcerto/emprestimocartaocreditobh.com.br/
+          port: ${{ secrets.CPANEL_FTP_PORT }}
+          server-dir: ./
           timeout: 600
           dangerous-clean-slate: false
           exclude: |
-            **.git/**
+            **/.git/**
             **/.github/**
             **/.vscode/**
             **/node_modules/**
             **/dist/**
-            **/build/**
-            **/*.log
-            **/*.tmp
-            **/*.zip
-            backend/**
+            **/backend/**
+            **/*.md
+            package.json
+            package-lock.json
